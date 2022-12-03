@@ -8,7 +8,7 @@ public class OpO extends Operador {
 	public OpO(Expresion exp1, Expresion exp2) {
 		this.exp1 = exp1;
 		this.exp2 = exp2;
-		descripcion = exp1.descripcion + " O " + exp2.descripcion; 
+		
 	}
 	
 	public boolean evaluar()
@@ -18,12 +18,18 @@ public class OpO extends Operador {
 	
 	public String getDescripcion()
 	{
-		return descripcion;
+		return exp1.descripcion + " O " + exp2.descripcion; 
 		
 	}
 	
 	public String toString() {		
-		return descripcion  ;
+		return getDescripcion();  
+	}
+
+	@Override
+	public boolean contiene(Expresion exp) {
+		
+		return exp1.contiene(exp) || exp2.contiene(exp);
 	}
 
 }

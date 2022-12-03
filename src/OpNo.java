@@ -6,7 +6,7 @@ public class OpNo extends Operador{
 	
 	public OpNo(Expresion exp) {
 		this.exp  = exp;
-		descripcion = " No "+exp.descripcion; 
+		
 	}
 	
 	public boolean evaluar()
@@ -17,12 +17,17 @@ public class OpNo extends Operador{
 	
 	public String getDescripcion()
 	{
-		return descripcion;
+		return "No "+ exp.getDescripcion();
 		
 	}
 	
 	public String toString() {		
-		return "No "+ descripcion;
+		return getDescripcion();
+	}
+
+	@Override
+	public boolean contiene(Expresion exp) {		
+		return this.exp.contiene(exp);
 	}
 
 }

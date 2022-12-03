@@ -1,3 +1,5 @@
+// Clase Elemento del patrón Composite
+
 
 public class Hecho extends Expresion {
 
@@ -26,6 +28,12 @@ public class Hecho extends Expresion {
 	
 	public String toString() {		
 		return descripcion;
+	}
+
+	@Override
+	public boolean contiene(Expresion exp) {
+		
+		return exp.getDescripcion().equals(descripcion);
 	}
 
 }

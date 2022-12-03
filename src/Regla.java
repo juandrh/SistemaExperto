@@ -9,7 +9,7 @@ public class Regla {
 	}
 
 	public boolean esAntecedente(Expresion exp) {
-		return exp.equals(antecedente);
+		return exp.contiene(exp);
 	}
 
 	public Hecho getConsecuente() {
@@ -17,7 +17,7 @@ public class Regla {
 	}
 	
 	public String toString() {		
-		return antecedente.descripcion + " -> " + consecuente.descripcion  ;
+		return antecedente.getDescripcion() + " -> " + consecuente.getDescripcion()  ;
 	}
 
 }

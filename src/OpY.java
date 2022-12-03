@@ -8,7 +8,7 @@ public class OpY extends Operador {
 	public OpY(Expresion exp1, Expresion exp2) {
 		this.exp1 = exp1;
 		this.exp2 = exp2;
-		descripcion =  exp1.descripcion + " Y " + exp2.descripcion ;  
+		
 	}
 	
 	public boolean evaluar()
@@ -16,14 +16,20 @@ public class OpY extends Operador {
 		return exp1.evaluar() && exp2.evaluar();
 	}
 	
-	public String descripcion()
+	public String getDescripcion()
 	{
-		return descripcion;
+		return exp1.descripcion + " Y " + exp2.descripcion ;  
 		
 	}
 	
 	public String toString() {		
-		return descripcion  ;
+		return getDescripcion();
+	}
+
+	@Override
+	public boolean contiene(Expresion exp) {
+		
+		return exp1.contiene(exp) || exp2.contiene(exp);
 	}
 
 
