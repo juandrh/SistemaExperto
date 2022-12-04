@@ -1,3 +1,5 @@
+package nitido;
+
 import java.util.List;
 
 public class OpNo extends Operador {

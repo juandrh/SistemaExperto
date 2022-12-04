@@ -1,3 +1,5 @@
+package difuso;
+
 import java.util.List;
 
 public class OpY extends Operador {
@@ -5,17 +7,14 @@ public class OpY extends Operador {
 
 	
 	
-	public OpY(String descripcion) {
-		super(descripcion); 
+	public OpY(String descripcion, float a, float b ) {
+		super(descripcion, a,  b );
 		
 	}
 	
-	public boolean evaluar(List<Hecho> hechos)
-	{
-		for (int i = 0; i < expresiones.size(); i++) {
-			if (!expresiones.get(i).evaluar(hechos)) return false;
-		}		
-		return true;
+public float fs(Callable f,float x)	{
+		
+		return Math.min(expresiones.get(0).fs(f,x),expresiones.get(1).fs(f,x));
 	}
 	
 	public String toString() {		

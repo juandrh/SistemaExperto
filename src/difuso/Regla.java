@@ -1,27 +1,28 @@
+package difuso;
+
 import java.util.List;
 
 public class Regla {
 
 	Expresion antecedente;
-	Hecho consecuente;
+	
+	Variable consecuente;
 	//String descConsecuente;
-	List<Hecho> hechos;
+	
 
-	public Regla(Expresion antecedente, Hecho consecuente, List<Hecho> hechos) {
+	public Regla(Expresion antecedente, Variable consecuentes) {
 		this.antecedente = antecedente;
 		this.consecuente = consecuente;
-		this.hechos = hechos;
+		
 	}
 
-	public boolean esAplicable() {			
-		return antecedente.evaluar(hechos);		
-	}
+	
 public void aplicarRegla() {
 		
-		hechos.add(consecuente);
+		//hechos.add(consecuente);
 	}
 
-	public Hecho getConsecuente() {
+	public Variable getConsecuente() {
 		
 		return consecuente;
 	}

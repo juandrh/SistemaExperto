@@ -1,3 +1,5 @@
+package nitido;
+
 import java.util.List;
 
 // Clase Elemento del patrón Composite
