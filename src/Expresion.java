@@ -1,18 +1,23 @@
+import java.util.List;
 
 // Clase Componente del patrón Composite
 
 public abstract class Expresion {
 
-	protected String descripcion;
+	protected String descripcion;	
 	
-	protected boolean valor ;
-	public abstract boolean evaluar();
-	public abstract String getDescripcion();
-	public abstract boolean contiene(Expresion exp);
-	
-	public String toString() {		
-		return descripcion;
+	public Expresion (String descripcion) {		
+		this.descripcion = descripcion;		
 	}
+	
+	public String getDescripcion () {		
+		return descripcion;		
+	}
+	
+	public abstract boolean evaluar(List<Hecho> hechos);	
+		
+	public abstract String toString() ;
+		
 	
 	
 

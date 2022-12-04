@@ -1,35 +1,33 @@
+import java.util.List;
 
 public class OpO extends Operador {
 
-	Expresion exp1;
-	Expresion exp2;
 	
-	
-	public OpO(Expresion exp1, Expresion exp2) {
-		this.exp1 = exp1;
-		this.exp2 = exp2;
+	public OpO(String descripcion) {
+		super(descripcion); 
 		
 	}
 	
-	public boolean evaluar()
+	public boolean evaluar(List<Hecho> hechos)
 	{
-		return exp1.evaluar() || exp2.evaluar();
-	}
-	
-	public String getDescripcion()
-	{
-		return exp1.descripcion + " O " + exp2.descripcion; 
 		
-	}
+			for (int i = 0; i < expresiones.size(); i++) {
+				if (expresiones.get(i).evaluar(hechos)) return true;
+			}		
+			return false;
+		}
+		
+		
 	
 	public String toString() {		
-		return getDescripcion();  
+		String texto = "(" +expresiones.get(0).toString();
+		for (int i = 1; i < expresiones.size(); i++) {
+		 texto += " O "+	expresiones.get(i).toString();
+		}	
+		texto += ")";
+		return texto; 
 	}
 
-	@Override
-	public boolean contiene(Expresion exp) {
-		
-		return exp1.contiene(exp) || exp2.contiene(exp);
-	}
+
 
 }

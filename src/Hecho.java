@@ -1,39 +1,29 @@
+import java.util.List;
+
 // Clase Elemento del patrón Composite
 
 
 public class Hecho extends Expresion {
 
 	
-	public Hecho(boolean valor,String descripcion ) {
-		this.valor = valor;
-		this.descripcion = descripcion;
+	  public Hecho(String descripcion ) {
+		  super(descripcion); 
+		  }
+	 
+	public boolean evaluar(List<Hecho> hechos)
+	{
+		// ¿Está la descripción en la lista de hechos?
+		for (int i = 0; i < hechos.size(); i++) {
+			if(hechos.get(i).getDescripcion().equals(descripcion)) return true;
+		}		
+		return false;
 	}
 	
-	public boolean evaluar()
-	{
-	return valor;
-	}
 	
-	public String getDescripcion()
-	{
-		return descripcion;
-		
-	}
-	
-	public void setValor(boolean v)
-	{
-		valor = v;
-		
-	}
 	
 	public String toString() {		
 		return descripcion;
 	}
 
-	@Override
-	public boolean contiene(Expresion exp) {
-		
-		return exp.getDescripcion().equals(descripcion);
-	}
-
+	
 }

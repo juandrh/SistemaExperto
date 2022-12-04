@@ -11,65 +11,98 @@ public class Principal {
 		List<Hecho> resultados = new ArrayList<Hecho>();
 		Hecho resultado = null;
 
-		Hecho P = new Hecho(true, "Pedido recibido");
+		Hecho P = new Hecho("Pedido recibido");		
+		Hecho CN = new Hecho("Cliente nuevo");		
+		Hecho TD = new Hecho("Tomar datos");
+		Hecho AD = new Hecho("Artículo disponible");		
+		Hecho CM = new Hecho("Cliente moroso");		
+		Hecho EP = new Hecho("Exigir pago deuda pendiente");
+		Hecho DL = new Hecho("Deuda liquidada");
+		Hecho DC = new Hecho("Datos de cliente completos");
+		Hecho PP = new Hecho("Procesar pedido");
+		Hecho RL = new Hecho("Robot libre");		
+		Hecho RC = new Hecho("Robot cargado");		
+		Hecho RD = new Hecho("Robot disponible para uso");
+		Hecho ET = new Hecho("Encargar tarea a robot");	
+		Hecho CB = new Hecho("Cargar batería");		
+		Hecho ER = new Hecho("Esperar robot esté libre");		
+		Hecho PA = new Hecho( "Pedir artículo a fábrica");
+		
+		
 		hechos.add(P);
-		Hecho CN = new Hecho(true, "Cliente nuevo");
-		hechos.add(CN);
-		Hecho DC = new Hecho(false, "Datos de cliente Recogidos");
-		Hecho TD = new Hecho(false, "Tomar datos");
-		Hecho AD = new Hecho(true, "Artículo disponible");
-		hechos.add(AD);
-		Hecho CM = new Hecho(true, "Cliente moroso");
-		hechos.add(CM);
-		Hecho EP = new Hecho(false, "Exigir pago deuda pendiente");
-		Hecho DL = new Hecho(false, "Deuda liquidada");
-		Hecho PP = new Hecho(false, "Procesar pedido");
-		Hecho RL = new Hecho(true, "Robot libre");
+		//hechos.add(CM);
+		hechos.add(AD);	
 		hechos.add(RL);
-		Hecho RC = new Hecho(true, "Robot cargado");
 		hechos.add(RC);
-		Hecho RD = new Hecho(false, "Robot disponible");
-		Hecho ET = new Hecho(false, "Encargar tarea a robot");
-		resultados.add(ET);
-		Hecho CB = new Hecho(false, "Cargar batería");
-		resultados.add(CB);
-		Hecho ER = new Hecho(false, "Esperar robot esté libre");
-		resultados.add(ER);
-		Hecho PA = new Hecho(false, "Pedir artículo a fábrica");
-		resultados.add(PA);
-		Regla R1 = new Regla(new OpY(P, CN), TD);
-		reglas.add(R1);
-		Regla R2 = new Regla(new OpO(TD, new OpNo(CN)), DC);
-		reglas.add(R2);
-		Regla R3 = new Regla(CM, EP);
-		reglas.add(R3);
-		Regla R4 = new Regla(EP, DL);
-		reglas.add(R4);
-		Regla R5 = new Regla(new OpY(new OpO(DL, DC), AD), PP);
-		reglas.add(R5);
-		Regla R6 = new Regla(new OpY(RL, RC), RD);
+		
+		
+		
+		
+		
+		resultados.add(ET); // fijar objetivo
+		
+		// R1:=  CN -> TD
+		Regla R1 = new Regla(CN, TD,hechos);	
+		reglas.add(R1);	
+		// R2:= (NO(CN) Y CM) -> EP
+		Operador O1 = new OpY("Y");
+		Operador O2 = new OpNo("No");
+		O2.anadir(CN);
+		O1.anadir(O2);O1.anadir(CM);
+		Regla R2 = new Regla(O1, EP,hechos);
+		reglas.add(R2);	
+		// R3: EP -> DL
+		Regla R3 = new Regla(EP, DL,hechos);
+		reglas.add(R3);			
+		// R4:= TD O  DL O (NoCN y NoCM)  -> DC	
+		Operador O3 = new OpO("O");		
+		Operador O4 = new OpNo("No");
+		Operador O5 = new OpNo("No");
+		Operador O6 = new OpY("Y");
+		O4.anadir(CN);O5.anadir(CM);		
+		O6.anadir(O4);O6.anadir(O5);
+		O3.anadir(TD);O3.anadir(DL);O3.anadir(O6);
+		Regla R4 = new Regla(O3, DC,hechos);
+		reglas.add(R4);		
+		
+		// R5:= P Y  DC Y AD  -> PP	
+		Operador O7 = new OpY("Y");
+		O7.anadir(P);O7.anadir(DC);O7.anadir(AD);		
+		Regla R5 = new Regla(O7, PP,hechos);
+		reglas.add(R5);				
+				
+				
+		// R6:= RL Y RC -> RD  
+		Operador O8 = new OpY("Y");
+		O8.anadir(RL);O8.anadir(RC);
+		Regla R6 = new Regla(O8, RD,hechos);
 		reglas.add(R6);
-		Regla R7 = new Regla(new OpY(PP, RD), ET);
+		
+		// R6:= PP Y RD -> ET 
+		Operador O9 = new OpY("Y");
+		O9.anadir(PP);O9.anadir(RD);
+		Regla R7 = new Regla(O9, ET,hechos);
 		reglas.add(R7);
-		Regla R8 = new Regla(new OpNo(CN), CB);
-		reglas.add(R8);
-		Regla R9 = new Regla(new OpNo(RL), ER);
-		reglas.add(R9);
-		Regla R10 = new Regla(new OpNo(AD), PA);
-		reglas.add(R10);
-
+		
 		
 		/*
+		 * Regla R8 = new Regla(new OpNo(CN), CB); reglas.add(R8); Regla R9 = new
+		 * Regla(new OpNo(RL), ER); reglas.add(R9); Regla R10 = new Regla(new OpNo(AD),
+		 * PA); reglas.add(R10);
+		 */
+
+		
+		
 		// Hechos iniciales y las reglas System.out.println("Hechos inciales: \n");
 		for (int i = 0; i < hechos.size(); i++) {
-			System.out.println(hechos.get(i).getDescripcion() + "(" + hechos.get(i).valor + ")");
+			System.out.println(hechos.get(i).toString());
 		}
 
 		System.out.println("\nReglas: \n");
 		for (int i = 0; i < reglas.size(); i++) {
 			System.out.println(reglas.get(i).toString());
 		}
-		*/
+		
 
 		/*
 		// Hechos añadidos
@@ -97,18 +130,11 @@ public class Principal {
 			for (int i = 0; i < reglas.size(); i++) {
 				for (int j = 0; j < hechos.size(); j++) {
 					Regla regla = reglas.get(i);
-					if (regla.esAntecedente(hechos.get(j)) && !conflictos.contains(regla)) {							
+					if (regla.esAplicable() && !conflictos.contains(regla)) {							
 							conflictos.add(regla);	
-							//reglas.remove(regla);
-							System.out.println("Regla añadida a conflictos: "+ regla.toString());		
-						
 					}
 				}
 			}
-
-			
-			
-			
 			
 			System.out.println("\nConflictos ronda " + ronda + ":\n");
 			for (int i = 0; i < conflictos.size(); i++) {
@@ -116,7 +142,7 @@ public class Principal {
 			}
 			System.out.println("\nHechos ronda " + ronda + ":\n");
 			for (int i = 0; i < hechos.size(); i++) {
-				System.out.println(hechos.get(i).getDescripcion() + "(" + hechos.get(i).valor + ")");
+				System.out.println(hechos.get(i).toString() + "(" + hechos.get(i).evaluar(hechos) + ")");
 			}
 
 
@@ -126,9 +152,9 @@ public class Principal {
 				conflicto = conflictos.get(i);
 				
 				if (!hechos.contains(conflicto.getConsecuente())) {
-					System.out.println("\nAñadido a hechos: " + conflicto.getConsecuente().getDescripcion());
-					hechos.add(conflicto.getConsecuente());					
-					conflicto.getConsecuente().setValor(true);	
+					System.out.println("\nAñadido a hechos: " + conflicto.getConsecuente().toString());
+					conflicto.aplicarRegla();	
+					reglas.remove(conflicto);
 					if (resultados.contains(conflicto.getConsecuente())) {
 						terminado = true;
 						resultado = conflicto.getConsecuente();	
