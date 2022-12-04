@@ -11,6 +11,8 @@ public class Principal {
 		List<Hecho> resultados = new ArrayList<Hecho>();
 		Hecho resultado = null;
 
+		
+		// Crear hechos con los estados posibles
 		Hecho P = new Hecho("Pedido recibido");		
 		Hecho CN = new Hecho("Cliente nuevo");		
 		Hecho TD = new Hecho("Tomar datos");
@@ -24,22 +26,24 @@ public class Principal {
 		Hecho RC = new Hecho("Robot cargado");		
 		Hecho RD = new Hecho("Robot disponible para uso");
 		Hecho ET = new Hecho("Encargar tarea a robot");	
-		Hecho CB = new Hecho("Cargar batería");		
-		Hecho ER = new Hecho("Esperar robot esté libre");		
+		Hecho CB = new Hecho("Cargar batería robot");		
+		Hecho ER = new Hecho("Esperar a que el robot esté libre");		
 		Hecho PA = new Hecho( "Pedir artículo a fábrica");
 		
+		// Añadir hechos a la base de conocmimientos
 		
 		hechos.add(P);
-		//hechos.add(CM);
+		hechos.add(CM);
 		hechos.add(AD);	
 		hechos.add(RL);
 		hechos.add(RC);
 		
 		
 		
-		
-		
 		resultados.add(ET); // fijar objetivo
+		resultados.add(CB);
+		resultados.add(ER);
+		resultados.add(PA);
 		
 		// R1:=  CN -> TD
 		Regla R1 = new Regla(CN, TD,hechos);	
@@ -78,19 +82,18 @@ public class Principal {
 		Regla R6 = new Regla(O8, RD,hechos);
 		reglas.add(R6);
 		
-		// R6:= PP Y RD -> ET 
+		// R7:= PP Y RD -> ET 
 		Operador O9 = new OpY("Y");
 		O9.anadir(PP);O9.anadir(RD);
 		Regla R7 = new Regla(O9, ET,hechos);
 		reglas.add(R7);
 		
-		
-		/*
-		 * Regla R8 = new Regla(new OpNo(CN), CB); reglas.add(R8); Regla R9 = new
-		 * Regla(new OpNo(RL), ER); reglas.add(R9); Regla R10 = new Regla(new OpNo(AD),
-		 * PA); reglas.add(R10);
-		 */
-
+		Operador O10 = new OpNo("No"); O10.anadir(RC);
+		Regla R8 = new Regla(O10, CB,hechos); reglas.add(R8);
+		Operador O11 = new OpNo("No"); O11.anadir(RL);
+		Regla R9 = new Regla(O11, ER,hechos); reglas.add(R9);
+		Operador O12 = new OpNo("No"); O12.anadir(AD);
+		Regla R10 = new Regla(O12, PA,hechos); reglas.add(R10);		
 		
 		
 		// Hechos iniciales y las reglas System.out.println("Hechos inciales: \n");
@@ -122,10 +125,10 @@ public class Principal {
 			}
 		}
 	*/
-		// Número de hechos totales = 16
+		// Límite máximo de repeticiones de bucle 30
 		int ronda = 1;
 		boolean terminado = false;
-		while (ronda < 20 && !terminado) {
+		while (ronda < 31 && !terminado) {
 			// Buscar conflictos
 			for (int i = 0; i < reglas.size(); i++) {
 				for (int j = 0; j < hechos.size(); j++) {
@@ -135,12 +138,12 @@ public class Principal {
 					}
 				}
 			}
-			
-			System.out.println("\nConflictos ronda " + ronda + ":\n");
+			System.out.println("\n-- Ronda " + ronda + " ----\n");
+			System.out.println("\nConflictos:");
 			for (int i = 0; i < conflictos.size(); i++) {
 				System.out.println(conflictos.get(i).toString());
 			}
-			System.out.println("\nHechos ronda " + ronda + ":\n");
+			System.out.println("\nHechos:");
 			for (int i = 0; i < hechos.size(); i++) {
 				System.out.println(hechos.get(i).toString() + "(" + hechos.get(i).evaluar(hechos) + ")");
 			}
@@ -152,7 +155,8 @@ public class Principal {
 				conflicto = conflictos.get(i);
 				
 				if (!hechos.contains(conflicto.getConsecuente())) {
-					System.out.println("\nAñadido a hechos: " + conflicto.getConsecuente().toString());
+					System.out.println("\nRegla aplicada: " + conflicto.toString());
+					System.out.println("Añadido a base de conocimiento: " + conflicto.getConsecuente().toString());
 					conflicto.aplicarRegla();	
 					reglas.remove(conflicto);
 					if (resultados.contains(conflicto.getConsecuente())) {
@@ -165,12 +169,14 @@ public class Principal {
 			}
 			conflictos.clear();
 			ronda++;
-
 		}
 		
-		
-
-		System.out.println("Resultado: " + resultado);
+		if (resultado==null) {			
+			System.out.println("No se ha obtenido resultado.\nRevisar las datos de entrada y las reglas.");	
+			
+		} else {			
+			System.out.println("Resultado: " + resultado);
+					}
 
 	}
 
