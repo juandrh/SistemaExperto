@@ -23,7 +23,7 @@ public class SEDifuso implements SistemaExperto {
 	Variable V;
 	Variable B;
 	Variable VC;
-	List<OpY> operadores;
+	List<Operador> operadores;
 	List<Regla> reglas;
 	List<Regla> conflictos;
 	List<Float> limitesConflictos;
@@ -37,7 +37,7 @@ public class SEDifuso implements SistemaExperto {
 		B = new Variable("Diferencia con nivel medio bateria", -1.0f, 1.0f); // negativa, cero, positiva
 		VC = new Variable("Potencia a aplicar", -0.5f, 0.50f); // reducir, mantener, aumentar
 
-		operadores = new ArrayList<OpY>();  // lista de operadores que formarán los antecedentes de las reglas
+		operadores = new ArrayList<Operador>();  // lista de operadores que formarán los antecedentes de las reglas
 		reglas = new ArrayList<Regla>();
 		conflictos = new ArrayList<Regla>(); // lista de reglas a aplicar con una entrada de datos
 		limitesConflictos = new ArrayList<Float>(); // lista valores límite que se obtienen de los antecedentes
@@ -45,7 +45,7 @@ public class SEDifuso implements SistemaExperto {
 	}
 
 	@Override
-	public void añadirDatosEntrada() {
+	public void datosEntrada() {
 		
 		// datos de entrada de ejemplo
 		entradaVelocidad = -0.1f;
@@ -54,7 +54,7 @@ public class SEDifuso implements SistemaExperto {
 	}
 
 	@Override
-	public void añadirReglas() {
+	public void anadirReglas() {
 		
 		// lista de operadores de intersección para crear los antecedentes
 		for (int i = 0; i < 9; i++) {
@@ -125,10 +125,11 @@ public class SEDifuso implements SistemaExperto {
 		System.out.println("Nº reglas que se activan: " + conflictos.size());
 
 		// Paso 2. Obtener la conclusión de cada regla y agregar
-		OpO agregacion = new OpO(VC);
+		Operador agregacion = new OpO();
 
 		for (int i = 0; i < conflictos.size(); i++) {
-			agregacion.anadir(conflictos.get(i).getFConsecuente(), limitesConflictos.get(i));
+			agregacion.anadir(conflictos.get(i).getFConsecuente(), VC);
+			agregacion.setLimite(limitesConflictos.get(i));
 		}
 		
 		// Paso 3. Nitidificación, búsqueda del centro de masa
@@ -137,7 +138,7 @@ public class SEDifuso implements SistemaExperto {
 		float sumaDenominador = 0.0f;
 		float intervalo = 0.02f;
 		for (float i = -1.0f; i <= 1.0f; i=i+intervalo) {
-			float v = agregacion.evaluar(i);
+			float v = agregacion.evaluar(i,0.0f);
 			sumaNumerador += i * v;
 			sumaDenominador += v;
 		}

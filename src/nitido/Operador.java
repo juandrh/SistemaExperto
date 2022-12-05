@@ -18,7 +18,7 @@ import java.util.List;
 public abstract class Operador extends Expresion {
 
 	List<Expresion> expresiones;
-	public abstract boolean evaluar(List<Hecho> hechos);
+	public abstract boolean evaluar(List<Expresion> hechos);
 
 	public Operador(String descripcion) {
 		super(descripcion);

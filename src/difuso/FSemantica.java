@@ -13,7 +13,7 @@ package difuso;
  * @version 1.0 Dic-2022
  */
 
-public abstract class FSemantica {
+public abstract class FSemantica implements Callable {
 	
 	public abstract float call(float a, float b, float x) ;
 	

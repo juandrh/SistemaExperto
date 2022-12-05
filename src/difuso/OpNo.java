@@ -13,7 +13,7 @@ package difuso;
  * @version 1.0 Dic-2022
  */
 
-public class OpNo   {
+public class OpNo extends Operador  {
 
 	FSemantica funcion;
 	Variable variable;
@@ -24,9 +24,15 @@ public class OpNo   {
 		
 	}
 
-	public float evaluar(float x) {
+	public float evaluar(float x,float y) {
 		
 		return -funcion.call(variable.a, variable.b, x);
+	}
+
+	@Override
+	public void setLimite(float limite) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	

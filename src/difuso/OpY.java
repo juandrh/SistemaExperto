@@ -14,7 +14,7 @@ import java.util.List;
  * @author Juan Del Rio
  * @version 1.0 Dic-2022
  */
-public class OpY  {
+public class OpY extends Operador {
 
 	List<FSemantica> funciones;
 	List<Variable> variables;
@@ -44,6 +44,12 @@ public class OpY  {
 		System.out.println("Valor operador Y-> " +resultado);
 		
 		return resultado;
+	}
+
+	@Override
+	public void setLimite(float limite) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

@@ -19,18 +19,18 @@ import principal.SistemaExperto;
 
 public class SENitido implements SistemaExperto {
 
-	List<Hecho> hechos;
+	List<Expresion> hechos;
 	List<Regla> reglas;
 	List<Regla> conflictos;
-	List<Hecho> resultados = new ArrayList<Hecho>();
-	Hecho P, CN, TD, AD, CM, EP, DL, DC, PP, RL, RC, RD, ET, CB, ER, PA, resultado;
+	List<Expresion> resultados = new ArrayList<Expresion>();
+	Expresion P, CN, TD, AD, CM, EP, DL, DC, PP, RL, RC, RD, ET, CB, ER, PA, resultado;
 
 	@Override
 	public void crearVariables() {
-		hechos = new ArrayList<Hecho>();
+		hechos = new ArrayList<Expresion>();
 		reglas = new ArrayList<Regla>();
 		conflictos = new ArrayList<Regla>();
-		resultados = new ArrayList<Hecho>();
+		resultados = new ArrayList<Expresion>();
 		resultado = null;
 
 		// Crear hechos con los estados posibles
@@ -54,7 +54,7 @@ public class SENitido implements SistemaExperto {
 	}
 
 	@Override
-	public void añadirDatosEntrada() {
+	public void datosEntrada() {
 		// Añadir hechos a la base de conocmimientos
 		hechos.add(P);
 		hechos.add(CM);
@@ -76,7 +76,7 @@ public class SENitido implements SistemaExperto {
 	}
 
 	@Override
-	public void añadirReglas() {
+	public void anadirReglas() {
 		// R1:= CN -> TD
 		Regla R1 = new Regla(CN, TD, hechos);
 		reglas.add(R1);

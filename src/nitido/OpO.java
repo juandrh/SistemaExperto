@@ -21,7 +21,7 @@ public class OpO extends Operador {
 
 	}
 
-	public boolean evaluar(List<Hecho> hechos) {
+	public boolean evaluar(List<Expresion> hechos) {
 
 		for (int i = 0; i < expresiones.size(); i++) {
 			if (expresiones.get(i).evaluar(hechos))

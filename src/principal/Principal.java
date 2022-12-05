@@ -52,8 +52,8 @@ public class Principal {
 	private static void ejecutaSistema(CreadorSistemaExperto creador) {
 
 		creador.crearVariables(); // Variables globales del sistema
-		creador.añadirDatosEntrada(); // Base de conocimiento: Inputs, Hechos
-		creador.añadirReglas(); // Base de conocimiento: Reglas
+		creador.datosEntrada(); // Base de conocimiento: Inputs, Hechos
+		creador.anadirReglas(); // Base de conocimiento: Reglas
 		creador.ejecutarMotor(); // Motor de inferencia
 		creador.mostrarResultado(); // Acción a realizar
 

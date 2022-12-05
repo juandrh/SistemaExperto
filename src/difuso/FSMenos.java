@@ -12,7 +12,7 @@ package difuso;
  * @author Juan Del Rio
  * @version 1.0 Dic-2022
  */
-public class FSMenos  extends FSemantica implements Callable {
+public class FSMenos  extends FSemantica {
 
 	@Override
 	public float call(float a, float b, float x) {

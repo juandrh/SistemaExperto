@@ -15,25 +15,28 @@ import java.util.List;
  * @author Juan Del Rio
  * @version 1.0 Dic-2022
  */
-public class OpO {
+public class OpO extends Operador{
 
 	List<FSemantica> funciones;
 	Variable variable;
 	float limite;
 
-	public OpO(Variable variable) {
-
+	public OpO() {
 		funciones = new ArrayList<FSemantica>();
-		this.variable = variable;
 		
 	}
 
-	public void anadir(FSemantica f, float limite) {
+	public void anadir(FSemantica f, Variable variable) {
+		this.variable = variable;
 		funciones.add(f);
+	}
+	
+	public void setLimite(float limite) {
 		this.limite = limite;
 	}
+	
 
-	public float evaluar(float x) {
+	public float evaluar(float x,float y) {
 
 		float max = 0.0f;
 

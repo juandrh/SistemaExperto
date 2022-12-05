@@ -22,7 +22,7 @@ public class Hecho extends Expresion {
 		  super(descripcion); 
 		  }
 	 
-	public boolean evaluar(List<Hecho> hechos)
+	public boolean evaluar(List<Expresion> hechos)
 	{
 		// ¿Está la descripción en la lista de hechos?
 		for (int i = 0; i < hechos.size(); i++) {

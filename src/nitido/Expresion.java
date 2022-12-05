@@ -26,7 +26,7 @@ public abstract class Expresion {
 		return descripcion;		
 	}
 	
-	public abstract boolean evaluar(List<Hecho> hechos);	
+	public abstract boolean evaluar(List<Expresion> hechos);	
 		
 	public abstract String toString() ;
 		

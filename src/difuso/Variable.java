@@ -22,23 +22,11 @@ public class Variable  {
 		  this.a = a;
 		  this.b = b;
 		  }
-	  
-	 
-	// Funciones semánticas (de pertenencia)
-	  public float fs(Callable f,float x)	
-	  {
-		   return f.call(a, b, x);		
-	}
-	  
-	 
-	
+
 	
 	public String toString() {		
 		return descripcion;
 	}
-
-
-
 
 	
 }

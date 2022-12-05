@@ -27,7 +27,7 @@ public class OpNo extends Operador {
 		}
 	}
 
-	public boolean evaluar(List<Hecho> hechos) {
+	public boolean evaluar(List<Expresion> hechos) {
 		return !expresiones.get(0).evaluar(hechos);
 	}
 

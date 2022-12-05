@@ -17,10 +17,10 @@ import java.util.List;
 public class Regla {
 
 	Expresion antecedente;
-	Hecho consecuente;
-	List<Hecho> hechos;
+	Expresion consecuente;
+	List<Expresion> hechos;
 
-	public Regla(Expresion antecedente, Hecho consecuente, List<Hecho> hechos) {
+	public Regla(Expresion antecedente, Expresion consecuente, List<Expresion> hechos) {
 		this.antecedente = antecedente;
 		this.consecuente = consecuente;
 		this.hechos = hechos;
@@ -35,7 +35,7 @@ public class Regla {
 		hechos.add(consecuente);
 	}
 
-	public Hecho getConsecuente() {
+	public Expresion getConsecuente() {
 
 		return consecuente;
 	}

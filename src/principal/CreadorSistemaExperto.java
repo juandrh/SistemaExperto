@@ -22,11 +22,11 @@ public abstract class CreadorSistemaExperto {
 		sistema.crearVariables();
 		}
 
-	public void añadirDatosEntrada() {		
-		sistema.añadirDatosEntrada();
+	public void datosEntrada() {		
+		sistema.datosEntrada();
 		}
-	public void añadirReglas() {		
-		sistema.añadirReglas();
+	public void anadirReglas() {		
+		sistema.anadirReglas();
 		}
 	public void ejecutarMotor() {		
 		sistema.ejecutarMotor();
