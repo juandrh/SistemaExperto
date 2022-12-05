@@ -1,6 +1,6 @@
 package difuso;
 
-public class FSMas  implements Callable {
+public class FSMas extends FSemantica implements Callable {
 
 	@Override
 	public float call(float a, float b, float x) {

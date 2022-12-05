@@ -1,34 +1,32 @@
 package difuso;
 
-import java.util.List;
 
 public class Regla {
 
-	Expresion antecedente;
-	
-	Variable consecuente;
-	//String descConsecuente;
-	
+	OpY op;	
+	FSemantica fConsecuente;
+	Variable vConsecuente;
+		
 
-	public Regla(Expresion antecedente, Variable consecuentes) {
-		this.antecedente = antecedente;
-		this.consecuente = consecuente;
+	public Regla(OpY op,FSemantica fConsecuente, Variable vConsecuente) {
+		this.op = op;
+		this.fConsecuente = fConsecuente;
+		this.vConsecuente = vConsecuente;
 		
 	}
 
-	
-public void aplicarRegla() {
-		
-		//hechos.add(consecuente);
+	public float evaluaAntecedente(float x,float y) {
+			
+		return op.evaluar(x,y);
 	}
-
-	public Variable getConsecuente() {
+	
+	public FSemantica getFConsecuente() {
 		
-		return consecuente;
+		return fConsecuente;
 	}
 		
 	public String toString() {		
-		return antecedente.toString() + " -> " + consecuente.getDescripcion()  ;
+		return "";
 	}
 	
 	

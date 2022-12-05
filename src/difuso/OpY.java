@@ -1,30 +1,39 @@
 package difuso;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class OpY extends Operador {
+public class OpY  {
 
+	List<FSemantica> funciones;
+	List<Variable> variables;
 
+	public OpY () {		
+		funciones = new ArrayList<FSemantica>();
+		variables = new ArrayList<Variable>();
+	}
 	
-	
-	public OpY(String descripcion, float a, float b ) {
-		super(descripcion, a,  b );
+	public void anadir(FSemantica f, Variable v)  {
+		// Máximo de operandos = 2
+		if (funciones.size() <2) {
+			funciones.add(f);
+			variables.add(v);
+		}
 		
 	}
 	
-public float fs(Callable f,float x)	{
+	public float evaluar(float x, float y) {
 		
-		return Math.min(expresiones.get(0).fs(f,x),expresiones.get(1).fs(f,x));
+		float r1=funciones.get(0).call(variables.get(0).a, variables.get(0).b, x);
+		float r2=funciones.get(1).call(variables.get(1).a, variables.get(1).b, y);		 
+		System.out.println("Operador Y: operando 1-> " +r1);
+		System.out.println("Operador Y: operando 2-> " +r2);
+		
+		float resultado = Math.min(r1,r2);
+		System.out.println("Valor operador Y-> " +resultado);
+		
+		return resultado;
 	}
+
 	
-	public String toString() {		
-		String texto = "(" +expresiones.get(0).toString();
-		for (int i = 1; i < expresiones.size(); i++) {
-		 texto += " Y "+	expresiones.get(i).toString();
-		}	
-		texto += ")";
-		return texto; 
-	}
-
-
 }

@@ -1,30 +1,22 @@
 package difuso;
 
-import java.util.List;
 
-public class OpNo extends Operador {
+public class OpNo   {
 
-	public OpNo(String descripcion, float a, float b ) {
-		super(descripcion, a,  b );
-	}
-
-	public void anadir(Expresion e) {
-		
-		// Operador unario, sólo admite una expresión
-		if (expresiones.size() == 0) {
-			expresiones.add(e);
-		}
-	}
-
-	public float fs(Callable f,float x)	{
-		
-		return 1.0f-f.call(a, b, x);
-		
-	}
-
+	FSemantica funcion;
+	Variable variable;
 	
-	public String toString() {
-		return "No " + expresiones.get(0).toString();
+	public void anadir(FSemantica f, Variable v) {
+		funcion = f;
+		variable = v;
+		
 	}
+
+	public float evaluar(float x) {
+		
+		return -funcion.call(variable.a, variable.b, x);
+	}
+	
+	
 
 }

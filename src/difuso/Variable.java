@@ -1,15 +1,17 @@
 package difuso;
 
-import java.util.List;
-
 // Clase Elemento del patrón Composite
 
 
-public class Variable extends Expresion {
+public class Variable  {
 
+		public String descripcion;
+		public float a,b;
 	
-	  public Variable(String descripcion, float a, float b ) { // a, b puntos de inflexión de la función de pertenencia
-		  super(descripcion, a,  b );
+	  public Variable(String descripcion, float a, float b ) { // a, b puntos de cambio de la función de pertenencia
+		  this.descripcion = descripcion;
+		  this.a = a;
+		  this.b = b;
 		  }
 	  
 	 

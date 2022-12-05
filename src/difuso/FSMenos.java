@@ -1,6 +1,6 @@
 package difuso;
 
-public class FSMenos  implements Callable {
+public class FSMenos  extends FSemantica implements Callable {
 
 	@Override
 	public float call(float a, float b, float x) {
