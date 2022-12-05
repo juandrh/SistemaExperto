@@ -2,11 +2,22 @@ package nitido;
 
 import java.util.List;
 
+/**
+ * Aplicación creadora de sistemas expertos nítidos o difusos con base de
+ * conocimiento de ejemplo. 
+ * Implementa los patrones: Interpreter, Composite y factory.
+ * 
+ * Sistema Experto Nítido Clase para reglas
+ * 
+ * 
+ * @author Juan Del Rio
+ * @version 1.0 Dic-2022
+ */
+
 public class Regla {
 
 	Expresion antecedente;
 	Hecho consecuente;
-	//String descConsecuente;
 	List<Hecho> hechos;
 
 	public Regla(Expresion antecedente, Hecho consecuente, List<Hecho> hechos) {
@@ -15,23 +26,22 @@ public class Regla {
 		this.hechos = hechos;
 	}
 
-	public boolean esAplicable() {			
-		return antecedente.evaluar(hechos);		
+	public boolean esAplicable() {
+		return antecedente.evaluar(hechos);
 	}
-public void aplicarRegla() {
-		
+
+	public void aplicarRegla() {
+
 		hechos.add(consecuente);
 	}
 
 	public Hecho getConsecuente() {
-		
+
 		return consecuente;
 	}
-		
-	public String toString() {		
-		return antecedente.toString() + " -> " + consecuente.getDescripcion()  ;
+
+	public String toString() {
+		return antecedente.toString() + " -> " + consecuente.getDescripcion();
 	}
-	
-	
 
 }

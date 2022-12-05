@@ -1,8 +1,20 @@
 package difuso;
 
 import java.util.ArrayList;
-import java.util.List;
 
+import java.util.List;
+/**
+ * Aplicación creadora de sistemas expertos nítidos o difusos
+ * con base de conocimiento de ejemplo.
+ * Implementa los patrones: Interpreter, Composite y factory
+ * 
+ * Sistema Experto Difuso
+ * Operador de agregación
+ * 
+ * 
+ * @author Juan Del Rio
+ * @version 1.0 Dic-2022
+ */
 public class OpO {
 
 	List<FSemantica> funciones;
@@ -28,14 +40,11 @@ public class OpO {
 		for (int i = 0; i < funciones.size(); i++) {
 			
 			//mínimo entre el valor del consecuente y el valor del antecedente
-			float valor = Math.min(funciones.get(i).call(variable.a, variable.b, x),limite);
-			System.out.println("Valor a agregar " + valor);
+			float valor = Math.min(funciones.get(i).call(variable.a, variable.b, x),limite);			
 			if (valor > max) {
 				max = valor;
 			}
 		}
-		System.out.println("Valor operador O-> " + max);
-
 		return max;
 	}
 

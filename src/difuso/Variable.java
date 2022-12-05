@@ -1,8 +1,17 @@
 package difuso;
 
-// Clase Elemento del patrón Composite
-
-
+/**
+ * Aplicación creadora de sistemas expertos nítidos o difusos
+ * con base de conocimiento de ejemplo.
+ * Implementa los patrones: Interpreter, Composite y factory
+ * 
+ * Sistema Experto Difuso
+ * Clase que implementa las variables 
+ * 
+ * 
+ * @author Juan Del Rio
+ * @version 1.0 Dic-2022
+ */
 public class Variable  {
 
 		public String descripcion;

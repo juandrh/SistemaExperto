@@ -4,6 +4,19 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * Aplicación creadora de sistemas expertos nítidos o difusos
+ * con base de conocimiento de ejemplo.
+ * Implementa los patrones: Interpreter, Composite y factory
+ * 
+ * Clase Principal: llama al creador y ejecuta el sistema elegido 
+ * 
+ * 
+ * @author Juan Del Rio
+ * @version 1.0 Dic-2022
+ */
+
+
 public class Principal {
 
 	public static void main(String[] args) {
@@ -12,12 +25,14 @@ public class Principal {
 		BufferedReader br = new BufferedReader(isr);
 		Boolean entradaPendiente = true;
 		CreadorSistemaExperto creador;
+		
 		while (entradaPendiente) {
 			try {
 				System.out.println("Selecciona el sistema experto a crear  (1-Nitido, 2-Difuso):");
 				String texto = br.readLine();
+				// Elección del creador del sistema concreto
 				if (texto.equals("1")) {
-					creador = new CreadorSistemaExpertoNitido();
+					creador = new CreadorSistemaExpertoNitido(); 
 					ejecutaSistema(creador);
 					entradaPendiente = false;
 				}
