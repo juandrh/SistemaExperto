@@ -3,24 +3,47 @@ package difuso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SEDifuso {
+import principal.SistemaExperto;
 
-	public static void main(String[] args) {
+public class SEDifuso implements SistemaExperto {
 
-		// Crear variables
-		Variable E = new Variable("E", -1.0f, 1.0f);
-		Variable T = new Variable("T", -0.5f, 0.5f);
-		Variable VC = new Variable("VC", -0.5f, 0.5f);
+	Variable E;
+	Variable T;
+	Variable VC;
 
-		List<OpY> operadores = new ArrayList<OpY>();
-		List<Regla> reglas = new ArrayList<Regla>();
-		List<Regla> conflictos = new ArrayList<Regla>();
-		List<Float> limitesConflictos = new ArrayList<Float>();
-		// List<Operador> opConsecuentes = new ArrayList<Operador>();
+	List<OpY> operadores;
+	List<Regla> reglas;
+	List<Regla> conflictos;
+	List<Float> limitesConflictos;
+	float inputE, inputT;
+	float resultadoAntecedente;
+	float valorNitidificado;
 
-		float inputE, inputT;
-		float resultadoAntecedente = 0.0f;
+	// Añadir hechos (valores de entrada)
+	@Override
+	public void crearVariables() {
+		E = new Variable("E", -1.0f, 1.0f);
+		T = new Variable("T", -0.5f, 0.5f);
+		VC = new Variable("VC", -0.5f, 0.5f);
 
+		operadores = new ArrayList<OpY>();
+		reglas = new ArrayList<Regla>();
+		conflictos = new ArrayList<Regla>();
+		limitesConflictos = new ArrayList<Float>();
+
+		resultadoAntecedente = 0.0f;
+
+	}
+
+	@Override
+	public void añadirDatosEntrada() {
+		inputE = -0.5f;
+		inputT = 0.7f;
+
+	}
+
+	@Override
+	public void añadirReglas() {
 		for (int i = 0; i < 9; i++) {
 			operadores.add(new OpY());
 		}
@@ -70,11 +93,10 @@ public class SEDifuso {
 		Regla R8 = new Regla(operadores.get(8), new FSMenos(), VC);
 		reglas.add(R8);
 
-		// Añadir hechos (valores de entrada)
+	}
 
-		inputE = -0.5f;
-		inputT = 0.7f;
-
+	@Override
+	public void ejecutarMotor() {
 		// Motor inferencia
 
 		// Paso 1. Evaluación del antecedente de cada regla
@@ -90,26 +112,31 @@ public class SEDifuso {
 		}
 		System.out.println("Nº reglas que se activan: " + conflictos.size());
 
-		// Paso 2. Obtener la conclusión de cada regla y agregar 
+		// Paso 2. Obtener la conclusión de cada regla y agregar
 		OpO agregacion = new OpO(VC);
 
 		for (int i = 0; i < conflictos.size(); i++) {
 
-			agregacion.anadir(conflictos.get(i).getFConsecuente(),limitesConflictos.get(i) );
+			agregacion.anadir(conflictos.get(i).getFConsecuente(), limitesConflictos.get(i));
 		}
-		// Paso 5. Nitidificación, búsqueda del centroide	
-		
-		float x[]= {-1.0f,-0.5f,-0.33f,-0.25f,0.25f,0.5f}; // Puntos donde hay un cambio de tendencia
-		float sumaNumerador=0.0f;
-		float sumaDenominador=0.0f;
-		for (int i=0;i < x.length;i++) {
-			sumaNumerador +=x[i]* agregacion.evaluar(x[i]); 
-			sumaDenominador +=agregacion.evaluar(x[i]);
+		// Paso 5. Nitidificación, búsqueda del centroide
+
+		float x[] = { -1.0f, -0.5f, -0.33f, -0.25f, 0.25f, 0.5f }; // Puntos donde hay un cambio de tendencia
+		float sumaNumerador = 0.0f;
+		float sumaDenominador = 0.0f;
+		for (int i = 0; i < x.length; i++) {
+			sumaNumerador += x[i] * agregacion.evaluar(x[i]);
+			sumaDenominador += agregacion.evaluar(x[i]);
 		}
-		
-		float valorNitidificado = sumaNumerador /  sumaDenominador;		
+
+		valorNitidificado = sumaNumerador / sumaDenominador;
+
+	}
+
+	@Override
+	public void mostrarResultado() {
 		System.out.println("valor nitidificado  : " + valorNitidificado);
-		
+
 	}
 
 }
