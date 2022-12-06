@@ -24,7 +24,7 @@ Se requiere:
 -	Que las reglas a crear por el sistema nítido permitan anidamiento de expresiones con operadores. El sistema difuso va a estar constreñido a dos variables de entrada y no necesita añadir esa complejidad.
 -	Se requiere que el sistema sea fácilmente reutilizable y extensible.
 
-Referencias:
+Fuentes:
 -	Gamma, E., Helm, R., Johnson, R., Vilssides, J. "Patrones de Diseño", Ed: Addison Wesley.
 -	García S., Alberto: Inteligencia Artificial. Fundamentos, práctica y aplicaciones. Editorial RC Libros. 2ª Ed. 2016
 
