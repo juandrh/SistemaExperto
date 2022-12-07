@@ -26,6 +26,8 @@ public class Principal {
 		Boolean entradaPendiente = true;
 		CreadorSistemaExperto creador;
 		
+		
+		
 		while (entradaPendiente) {
 			try {
 				System.out.println("Selecciona el sistema experto a crear  (1-Nitido, 2-Difuso):");
@@ -46,6 +48,10 @@ public class Principal {
 				e.printStackTrace();
 			}
 		}
+		
+		
+		
+		
 		System.out.println("Saliendo del sistema");
 	}
 

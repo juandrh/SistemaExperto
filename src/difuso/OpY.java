@@ -37,11 +37,11 @@ public class OpY extends Operador {
 		
 		float r1=funciones.get(0).call(variables.get(0).a, variables.get(0).b, x);
 		float r2=funciones.get(1).call(variables.get(1).a, variables.get(1).b, y);		 
-		System.out.println("Operador Y: operando 1-> " +r1);
-		System.out.println("Operador Y: operando 2-> " +r2);
+		//System.out.println("Operador Y: operando 1-> " +r1);
+		//System.out.println("Operador Y: operando 2-> " +r2);
 		
 		float resultado = Math.min(r1,r2);
-		System.out.println("Valor operador Y-> " +resultado);
+		//System.out.println("Valor operador Y-> " +resultado);
 		
 		return resultado;
 	}

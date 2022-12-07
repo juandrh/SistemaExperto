@@ -154,7 +154,7 @@ public class SENitido implements SistemaExperto {
 		int ronda = 1;
 		boolean terminado = false;
 		while (ronda <= 30 && !terminado) {
-			// Buscar conflictos
+			// Filtrado: Buscar conflictos
 			for (int i = 0; i < reglas.size(); i++) {
 				for (int j = 0; j < hechos.size(); j++) {
 					Regla regla = reglas.get(i);
@@ -173,12 +173,13 @@ public class SENitido implements SistemaExperto {
 				System.out.println(hechos.get(i).toString() + "(" + hechos.get(i).evaluar(hechos) + ")");
 			}
 
-			// Elegir la primera regla que aporte conocimiento
+			// Resolución de conflictos: elegir la primera regla que aporte conocimiento
 			Regla conflicto = null;
 			for (int i = 0; i < conflictos.size(); i++) {
 				conflicto = conflictos.get(i);
 
 				if (!hechos.contains(conflicto.getConsecuente())) {
+					// Fase de ejecución: añadir el consecuente a la base de conocimiento
 					System.out.println("\nRegla aplicada: " + conflicto.toString());
 					System.out.println("Añadido a base de conocimiento: " + conflicto.getConsecuente().toString());
 					conflicto.aplicarRegla();

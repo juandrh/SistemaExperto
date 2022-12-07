@@ -26,7 +26,7 @@ public class OpNo extends Operador  {
 
 	public float evaluar(float x,float y) {
 		
-		return -funcion.call(variable.a, variable.b, x);
+		return 1.0f-funcion.call(variable.a, variable.b, x);
 	}
 
 	@Override
